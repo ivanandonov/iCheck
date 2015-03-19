@@ -71,7 +71,22 @@
           fire();
         }
       });
-
+      
+	// Get some property
+    } else if (/^(input|checked)$/i.test(options)) {
+		var input;
+		switch (options) {
+			case 'input':
+				walker(this);
+				return stack.get(0);
+			case 'checked':
+				walker(this);
+				if (stack.size()) {
+					return stack.eq(0).prop('checked');
+				}
+				return false;
+		}
+    
     // Customization
     } else if (typeof options == 'object' || !options) {
 
